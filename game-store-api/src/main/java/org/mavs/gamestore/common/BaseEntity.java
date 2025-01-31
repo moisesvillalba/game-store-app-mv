@@ -1,9 +1,6 @@
 package org.mavs.gamestore.common;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +16,6 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 public class BaseEntity {
 
     @Id
-    @GeneratedValue
-    private String id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private Long id;
 }

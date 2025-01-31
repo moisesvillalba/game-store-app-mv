@@ -1,0 +1,17 @@
+services:
+  postgres:
+      container_name: postgres-gamestore-app
+      image: postgres:17.2-alpine
+      environment:
+        POSTGRES_USER: username
+        POSTGRES_PASSWORD: password
+        PG_DATA: /var/lib/postgresql/data
+        POSTGRES_DB: game_store_app_db
+      volumes:
+        - postgres:/var/lib/postgresql/data
+      ports:
+        - 5432:5432
+      restart: always  # El contenedor se reiniciará siempre, incluso después de un reinicio de la máquina
+volumes:
+  postgres:
+    driver: local
