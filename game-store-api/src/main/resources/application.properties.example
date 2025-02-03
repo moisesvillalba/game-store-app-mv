@@ -1,8 +1,8 @@
 spring.application.name=mydatabase
 # application.properties o application.yml
-spring.datasource.url=jdbc:postgresql://localhost:5432/mydatabase
-spring.datasource.username=myuser
-spring.datasource.password=mypassword
+spring.datasource.url=jdbc:postgresql://localhost:5432/game_store_app_db
+spring.datasource.username=username
+spring.datasource.password=password
 spring.datasource.driver-class-name=org.postgresql.Driver
 
 #Puedes usar 'create', 'validate', 'update' o 'none'  update
@@ -10,5 +10,6 @@ spring.jpa.show-sql=true
 #Para mostrar las consultas SQL en los logs
 # Opcionalmente, puedes configurar la creación y actualización de esquemas
 spring.jpa.properties.hibernate.format_sql=true  # Para formato de SQL más legible
+spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
 
 server.port=8082

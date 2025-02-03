@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: game-store
+  datasource:
+    url: jdbc:postgresql://localhost:5432/game_store_app_db
+    username: username
+    password: password
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 20
+      connection-timeout: 30000
+      idle-timeout: 60000
+      max-lifetime: 1800000
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        open-in-view: false
+
+
+server:
+  port: 8082
+
+logging:
+  level:
+    root: WARN  # Reduce logs generales
+    org.springframework.web: ERROR
+    org.hibernate: ERROR
+    org.mavs.gamestore: INFO  # Logs específicos de tu paquete
+    #com.zaxxer.hikari: INFO # O incluso WARN si solo quieres errores
+  pattern:
+    console: "%clr(%d{HH:mm:ss.SSS}){blue} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"

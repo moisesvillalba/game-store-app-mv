@@ -1,17 +1,27 @@
+version: "3.9"  # Specify a version for docker-compose
+
 services:
   postgres:
-      container_name: postgres-gamestore-app
-      image: postgres:17.2-alpine
-      environment:
-        POSTGRES_USER: username
-        POSTGRES_PASSWORD: password
-        PG_DATA: /var/lib/postgresql/data
-        POSTGRES_DB: game_store_app_db
-      volumes:
-        - postgres:/var/lib/postgresql/data
-      ports:
-        - 5432:5432
-      restart: always  # El contenedor se reiniciará siempre, incluso después de un reinicio de la máquina
+    container_name: postgres-gamestore-app
+    image: postgres:17.2-alpine
+    environment:
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: password  # Consider Docker secrets for production
+      POSTGRES_DB: game_store_app_db
+      POSTGRES_HOST_AUTH_METHOD: scram-sha-256 # Explicitly set authentication method
+      PGDATA: /var/lib/postgresql/data
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    restart: always
+    healthcheck:  # Add a health check
+      test: ["CMD-SHELL", "pg_isready -U username -d game_store_app_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s  # Give the database time to initialize
+
 volumes:
   postgres:
-    driver: local
+    driver: local # Optional, as 'local' is the default
